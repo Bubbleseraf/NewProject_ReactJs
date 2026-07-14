@@ -1,22 +1,27 @@
+import { useContext } from "react";
 import { Link, Outlet } from "react-router";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
+import { useScroll } from "../hooks/useScroll";
 
 function Layout() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { user } = useContext(AuthContext);
+  const scrollY = useScroll();
 
   return (
     <div>
-      <nav style={{ display: "flex", gap: "1rem", padding: "1rem", borderBottom: "1px solid #ccc" }}>
+      <nav
+        style={{
+          display: "flex",
+          gap: "1rem",
+          padding: "1rem",
+          borderBottom: "1px solid #ccc",
+          backgroundColor: scrollY > 50 ? "#f0f0f0" : "white",
+        }}
+      >
         <Link to="/">Home</Link>
-        {isAuthenticated && <Link to="/posts">Posts</Link>}
-        {!isAuthenticated && <Link to="/login">Login</Link>}
-        {!isAuthenticated && <Link to="/register">Register</Link>}
-        {isAuthenticated && (
-          <span style={{ marginLeft: "auto" }}>
-            Ciao, {user.name}!{" "}
-            <button onClick={logout}>Logout</button>
-          </span>
-        )}
+        {user && <Link to="/posts">Posts</Link>}
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
       </nav>
 
       <main style={{ padding: "1rem" }}>
