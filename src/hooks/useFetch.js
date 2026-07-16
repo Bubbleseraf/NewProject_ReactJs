@@ -6,24 +6,27 @@ export function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    async function fetchData() {
+      setLoading(true);
+      setError(null);
 
-    fetch(url)
-      .then((response) => {
+      try {
+        const response = await fetch(url);
+
         if (!response.ok) {
           throw new Error("Errore nella richiesta");
         }
-        return response.json();
-      })
-      .then((result) => {
+
+        const result = await response.json();
         setData(result);
-        setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    }
+
+    fetchData();
   }, [url]);
 
   return { data, loading, error };
