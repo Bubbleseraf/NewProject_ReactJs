@@ -1,29 +1,45 @@
+import { useContext } from "react";
 import { Link, Outlet } from "react-router";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useScroll } from "../hooks/useScroll";
 
 function Layout() {
-  const { user } = useAuth();
+  const { user } = useContext(AuthContext);
   const scrollY = useScroll();
 
   return (
-    <div>
+    <div className="min-h-screen bg-base-200">
       <nav
-        style={{
-          display: "flex",
-          gap: "1rem",
-          padding: "1rem",
-          borderBottom: "1px solid #ccc",
-          backgroundColor: scrollY > 50 ? "#f0f0f0" : "white",
-        }}
+        className={`navbar px-6 sticky top-0 z-10 transition-colors ${
+          scrollY > 50 ? "bg-base-100 shadow-md" : "bg-base-100"
+        }`}
       >
-        <Link to="/">Home</Link>
-        {user && <Link to="/posts">Posts</Link>}
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <div className="flex-1">
+          <Link to="/" className="btn btn-ghost text-xl">
+            ReactJs
+          </Link>
+        </div>
+        <div className="flex-none gap-2">
+          <ul className="menu menu-horizontal px-1 items-center">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            {user && (
+              <li>
+                <Link to="/posts">Posts</Link>
+              </li>
+            )}
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </ul>
+        </div>
       </nav>
 
-      <main style={{ padding: "1rem" }}>
+      <main className="max-w-4xl mx-auto p-6">
         <Outlet />
       </main>
     </div>

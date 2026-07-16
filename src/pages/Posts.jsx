@@ -13,14 +13,22 @@ function Posts() {
 
   return (
     <div>
-      <h1>Posts</h1>
-      <ul>
+      <h1 className="text-3xl font-bold mb-6">Posts</h1>
+      <div className="grid gap-4 md:grid-cols-2">
         {posts.map((post) => (
-          <li key={post.id}>
-            <Link to={`/posts/${post.id}`}>{post.title}</Link>
-          </li>
+          <div key={post.id} className="card bg-base-100 shadow-md">
+            <div className="card-body">
+              <h2 className="card-title">{post.title}</h2>
+              <p className="line-clamp-2 text-sm opacity-70">{post.body}</p>
+              <div className="card-actions justify-end">
+                <Link to={`/posts/${post.id}`} className="btn btn-primary btn-sm">
+                  Leggi
+                </Link>
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

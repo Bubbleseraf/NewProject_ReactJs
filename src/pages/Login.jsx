@@ -1,22 +1,38 @@
 function Login() {
   return (
-    <div>
-      <h1>Login</h1>
-      <form>
-        <div>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input type="email" id="email" name="email" />
-        </div>
-        <div style={{ marginTop: "0.5rem" }}>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input type="password" id="password" name="password" />
-        </div>
-        <button type="submit" style={{ marginTop: "1rem" }}>
-          Accedi
-        </button>
-      </form>
+    <div className="card bg-base-100 shadow-md max-w-sm mx-auto">
+      <div className="card-body">
+        <h1 className="card-title text-2xl mb-4">Login</h1>
+        <form>
+          <div className="form-control mb-3">
+            <label className="label" htmlFor="email">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <div className="form-control mb-4">
+            <label className="label" htmlFor="password">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary w-full">
+            Accedi
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
