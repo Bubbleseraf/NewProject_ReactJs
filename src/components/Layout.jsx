@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import { Link, Outlet } from "react-router";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useScroll } from "../hooks/useScroll";
 
 function Layout() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const scrollY = useScroll();
 
   return (
